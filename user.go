@@ -110,7 +110,6 @@ func (cl *Client) GetUser(args GetUserArgs) (*User, error) {
 }
 
 func (cl *Client) CreateUser(dn string, userAttrs []ldap.Attribute) error {
-
 	addReq := ldap.NewAddRequest(dn, []ldap.Control{})
 	addReq.Attributes = userAttrs
 

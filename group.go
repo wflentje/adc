@@ -111,7 +111,6 @@ func (cl *Client) GetGroup(args GetGroupArgs) (*Group, error) {
 }
 
 func (cl *Client) CreateGroup(dn string, groupAttrs []ldap.Attribute) error {
-
 	addReq := ldap.NewAddRequest(dn, []ldap.Control{})
 	addReq.Attributes = groupAttrs
 
