@@ -144,6 +144,12 @@ func (cl *Client) searchEntry(req *ldap.SearchRequest) (*ldap.Entry, error) {
 	return result.Entries[0], nil
 }
 
+// Adds a request
+func (cl *Client) addRequest(req *ldap.AddRequest) error {
+	err := cl.ldap.Add(req)
+	return err
+}
+
 // SearchEntries Perfroms search for ldap entries.
 func (cl *Client) searchEntries(req *ldap.SearchRequest) ([]*ldap.Entry, error) {
 	result, err := cl.ldap.Search(req)

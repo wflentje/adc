@@ -110,6 +110,14 @@ func (cl *Client) GetGroup(args GetGroupArgs) (*Group, error) {
 	return result, nil
 }
 
+func (cl *Client) CreateGroup(dn string, groupAttrs []ldap.Attribute) error {
+
+	addReq := ldap.NewAddRequest(dn, []ldap.Control{})
+	addReq.Attributes = groupAttrs
+
+	return cl.addRequest(addReq)
+}
+
 func (cl *Client) getGroupMembers(dn string) ([]GroupMember, error) {
 	req := &ldap.SearchRequest{
 		BaseDN:       cl.Config.Users.SearchBase,
