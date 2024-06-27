@@ -109,6 +109,13 @@ func (cl *Client) GetUser(args GetUserArgs) (*User, error) {
 	return result, nil
 }
 
+func (cl *Client) CreateUser(dn string, userAttrs []ldap.Attribute) error {
+	addReq := ldap.NewAddRequest(dn, []ldap.Control{})
+	addReq.Attributes = userAttrs
+
+	return cl.addRequest(addReq)
+}
+
 func (cl *Client) getUserGroups(dn string) ([]UserGroup, error) {
 	req := &ldap.SearchRequest{
 		BaseDN:       cl.Config.Groups.SearchBase,
