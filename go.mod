@@ -1,4 +1,4 @@
-module github.com/dlampsi/adc
+module github.com/appliedres/adc
 
 go 1.21.1
 
