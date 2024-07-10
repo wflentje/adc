@@ -144,9 +144,15 @@ func (cl *Client) searchEntry(req *ldap.SearchRequest) (*ldap.Entry, error) {
 	return result.Entries[0], nil
 }
 
-// Adds a request
+// Add request
 func (cl *Client) addRequest(req *ldap.AddRequest) error {
 	err := cl.ldap.Add(req)
+	return err
+}
+
+// Delete request
+func (cl *Client) deleteRequest(req *ldap.DelRequest) error {
+	err := cl.ldap.Del(req)
 	return err
 }
 
