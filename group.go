@@ -117,6 +117,12 @@ func (cl *Client) CreateGroup(dn string, groupAttrs []ldap.Attribute) error {
 	return cl.addRequest(addReq)
 }
 
+func (cl *Client) DeleteGroup(dn string) error {
+	delReq := ldap.NewDelRequest(dn, []ldap.Control{})
+
+	return cl.deleteRequest(delReq)
+}
+
 func (cl *Client) getGroupMembers(dn string) ([]GroupMember, error) {
 	req := &ldap.SearchRequest{
 		BaseDN:       cl.Config.Users.SearchBase,
