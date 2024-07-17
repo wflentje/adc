@@ -123,6 +123,14 @@ func (cl *Client) DeleteGroup(dn string) error {
 	return cl.deleteRequest(delReq)
 }
 
+func (cl *Client) UpdateGroup(grp Group, groupAttrs []ldap.Attribute) error {
+	modReq := ldap.NewModifyRequest(grp.DN, []ldap.Control{})
+	for _, a := range groupAttrs {
+		modReq.Replace(a.Type, a.Vals)
+	}
+	return cl.modifyRequest(modReq)
+}
+
 func (cl *Client) getGroupMembers(dn string) ([]GroupMember, error) {
 	req := &ldap.SearchRequest{
 		BaseDN:       cl.Config.Users.SearchBase,
