@@ -116,6 +116,20 @@ func (cl *Client) CreateUser(dn string, userAttrs []ldap.Attribute) error {
 	return cl.addRequest(addReq)
 }
 
+func (cl *Client) DeleteUser(dn string) error {
+	delReq := ldap.NewDelRequest(dn, []ldap.Control{})
+
+	return cl.deleteRequest(delReq)
+}
+
+func (cl *Client) UpdateUser(dn string, userAttrs []ldap.Attribute) error {
+	modReq := ldap.NewModifyRequest(dn, []ldap.Control{})
+	for _, a := range userAttrs {
+		modReq.Replace(a.Type, a.Vals)
+	}
+	return cl.modifyRequest(modReq)
+}
+
 func (cl *Client) getUserGroups(dn string) ([]UserGroup, error) {
 	req := &ldap.SearchRequest{
 		BaseDN:       cl.Config.Groups.SearchBase,

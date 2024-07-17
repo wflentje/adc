@@ -156,6 +156,12 @@ func (cl *Client) deleteRequest(req *ldap.DelRequest) error {
 	return err
 }
 
+// Modify request
+func (cl *Client) modifyRequest(req *ldap.ModifyRequest) error {
+	err := cl.ldap.Modify(req)
+	return err
+}
+
 // SearchEntries Perfroms search for ldap entries.
 func (cl *Client) searchEntries(req *ldap.SearchRequest) ([]*ldap.Entry, error) {
 	result, err := cl.ldap.Search(req)
