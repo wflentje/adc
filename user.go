@@ -66,6 +66,9 @@ func (cl *Client) ListUsers(args GetUserArgs, filter string) (*[]User, error) {
 	if args.Attributes != nil {
 		req.Attributes = args.Attributes
 	}
+	if len(filter) > 0 {
+		req.Filter = filter
+	}
 
 	entries, err := cl.searchEntries(req)
 	if err != nil {
